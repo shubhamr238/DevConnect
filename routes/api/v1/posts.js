@@ -13,7 +13,7 @@ router.get("/", postController.fetchAllPosts);
 // @access  Public
 router.get("/:id", postController.getPostById);
 
-//@route  POST api/v1/users/profile
+//@route  POST api/v1/posts
 //@desc   Create Post
 //@access Private
 router.post(

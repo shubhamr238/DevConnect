@@ -21,22 +21,22 @@ router.post(
   profileController.createProfile
 );
 
-// @route   GET api/profile/all
+// @route   GET api/v1/profile/all
 // @desc    Get all profiles
 // @access  Public
 router.get("/all", profileController.returnAllProfile);
 
-// @route   GET api/profile/handle/:handle
+// @route   GET api/v1/profile/handle/:handle
 // @desc    Get profile by handle
 // @access  Public
 router.get("/handle/:handle", profileController.getProfileByHandle);
 
-// @route   GET api/profile/user/:user_id
+// @route   GET api/v1/profile/user/:user_id
 // @desc    Get profile by user ID
 // @access  Public
 router.get("/user/:user_id", profileController.getProfileByUserId);
 
-// @route   POST api/profile/experience
+// @route   POST api/v1/profile/experience
 // @desc    Add experience to profile
 // @access  Private
 router.post(
@@ -45,7 +45,7 @@ router.post(
   profileController.addExprience
 );
 
-// @route   POST api/profile/education
+// @route   POST api/v1/profile/education
 // @desc    Add education to profile
 // @access  Private
 router.post(
@@ -54,7 +54,7 @@ router.post(
   profileController.addEducation
 );
 
-// @route   DELETE api/profile/experience/:exp_id
+// @route   DELETE api/v1/profile/experience/:exp_id
 // @desc    Delete experience from profile
 // @access  Private
 router.delete(
@@ -63,7 +63,7 @@ router.delete(
   profileController.deleteExprience
 );
 
-// @route   DELETE api/profile/education/:edu_id
+// @route   DELETE api/v1/profile/education/:edu_id
 // @desc    Delete education from profile
 // @access  Private
 router.delete(
@@ -72,7 +72,7 @@ router.delete(
   profileController.deleteEducation
 );
 
-// @route   DELETE api/profile
+// @route   DELETE api/v1/profile
 // @desc    Delete user and profile
 // @access  Private
 router.delete(
