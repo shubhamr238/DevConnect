@@ -13,12 +13,4 @@ router.post("/register", userController.registerUser);
 //@access Public
 router.post("/login", userController.loginUser);
 
-router.get(
-  "/valid",
-  passport.authenticate("jwt", { session: false }),
-  function (req, res) {
-    console.log("Yo!");
-    return res.json({ msg: "success...." });
-  }
-);
 module.exports = router;
