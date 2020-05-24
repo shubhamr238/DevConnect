@@ -8,7 +8,9 @@ const Keys = require("../../../config/keys");
 const validateRegisterInput = require("../../../validation/register");
 const validateLoginInput = require("../../../validation/login");
 
-//Register User (/api/v1/register)
+//@route  POST api/v1/users/register
+//@desc   Register User
+//@access Public
 module.exports.registerUser = async function (req, res) {
   try {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -44,7 +46,9 @@ module.exports.registerUser = async function (req, res) {
   }
 };
 
-//Login a User by providing JWT Token (/api/v1/login)
+//@route  POST api/v1/users/login
+//@desc   Login a User(Return JWT Token)
+//@access Public
 module.exports.loginUser = async function (req, res) {
   try {
     const { errors, isValid } = validateLoginInput(req.body);
