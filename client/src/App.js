@@ -1,10 +1,16 @@
 import React from "react";
 import "./App.css";
 
+import Navbar from "./components/layouts/navbar";
+import Footer from "./components/layouts/footer";
+import Landing from "./components/layouts/landing";
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <Navbar />
+      <Landing />
+      <Footer />
     </div>
   );
 }
