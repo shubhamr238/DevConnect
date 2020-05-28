@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import classnames from "classnames";
+import { connect } from "react-redux";
+import { registerUser } from "../../redux/actions/authActions";
 
 class Register extends Component {
   constructor() {
@@ -18,9 +21,23 @@ class Register extends Component {
     //this.onSubmit = this.onSubmit.bind(this);
   }
 
+  //-------- THIS IS DEPRICATED-------
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.errors) {
+  //     this.setState({ errors: nextProps.errors });
+  //   }
+  // }
+  //----------------------------------
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors) {
+      return { errors: props.errors };
+    }
+  }
+
   onChange = (e) => {
-    if (e.target.classList.contains("is-invalid"))
-      e.target.classList.remove("is-invalid");
+    //TODO- MAKE A WAY SO THAT RED CLASS(IS_INVALID) DISAPPERS ONCE USER STARTS TYPING ON THE FIELD
+    // if ((!this.props.error) && e.target.classList.contains("is-invalid"))
+    //   e.target.classList.remove("is-invalid");
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -34,10 +51,7 @@ class Register extends Component {
       password2: this.state.password2,
     };
 
-    axios
-      .post("/api/v1/users/register", newUser)
-      .then((res) => console.log(res.data))
-      .catch((err) => this.setState({ errors: err.response.data }));
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
@@ -126,5 +140,14 @@ class Register extends Component {
     );
   }
 }
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
 
-export default Register;
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
