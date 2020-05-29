@@ -34,6 +34,12 @@ class Register extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   onChange = (e) => {
     //TODO- MAKE A WAY SO THAT RED CLASS(IS_INVALID) DISAPPERS ONCE USER STARTS TYPING ON THE FIELD
     // if ((!this.props.error) && e.target.classList.contains("is-invalid"))
