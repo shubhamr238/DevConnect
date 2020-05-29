@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 import Navbar from "./components/layouts/navbar";
@@ -9,6 +9,8 @@ import Landing from "./components/layouts/landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
+
+import PrivateRoute from "./components/common/PrivateRoute";
 
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./redux/actions/authActions";
@@ -47,7 +49,9 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Switch>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          </Switch>
           <Footer />
         </div>
       </Router>
