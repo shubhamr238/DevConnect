@@ -1,4 +1,5 @@
 const Profile = require("../../../models/Profile");
+const User = require("../../../models/User");
 const Keys = require("../../../config/keys");
 
 // Load Validation
