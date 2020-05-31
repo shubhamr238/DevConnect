@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
+import MediaQuery from "react-responsive";
 
 class Landing extends Component {
   componentDidMount() {
@@ -17,7 +18,12 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">DevConnect</h1>
+                <MediaQuery minDeviceWidth={320} maxDeviceWidth={767}>
+                  <h1 className="display-4 mb-4">DevConnect</h1>
+                </MediaQuery>
+                <MediaQuery minDeviceWidth={768}>
+                  <h1 className="display-3 mb-4">DevConnect</h1>
+                </MediaQuery>
                 <p className="lead">
                   {" "}
                   Create a developer profile/portfolio, share posts and get help
@@ -25,7 +31,7 @@ class Landing extends Component {
                 </p>
                 <hr />
                 <Link to="/register" className="btn btn-lg btn-info mr-2">
-                  Sign Up
+                  Register
                 </Link>
                 <Link to="/login" className="btn btn-lg btn-light">
                   Login
