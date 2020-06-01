@@ -96,9 +96,9 @@ export const deleteEducation = (id) => (dispatch) => {
     );
 };
 
-//Get all Profiles
 // Get all profiles
 export const getProfiles = () => (dispatch) => {
+  dispatch(clearCurrentProfile());
   dispatch(setProfileLoading());
   axios
     .get("/api/v1/profile/all")
@@ -114,6 +114,26 @@ export const getProfiles = () => (dispatch) => {
         payload: null,
       })
     );
+};
+
+// Get profile by handle
+export const getProfileByHandle = (handle, history) => (dispatch) => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/v1/profile/handle/${handle}`)
+    .then((res) =>
+      dispatch({
+        type: types.GET_PROFILE,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch({
+        type: types.GET_PROFILE,
+        payload: null,
+      });
+      history.push("/not-found");
+    });
 };
 
 // Delete account & profile
