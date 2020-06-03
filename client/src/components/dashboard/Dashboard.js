@@ -6,7 +6,9 @@ import { connect } from "react-redux";
 import {
   getCurrentProfile,
   deleteAccount,
+  clearCurrentProfile,
 } from "../../redux/actions/profileActions";
+import { logoutUser } from "../../redux/actions/authActions";
 import Spinner from "../common/Spinner";
 
 import ProfileActions from "./ProfileActions";
@@ -14,6 +16,11 @@ import Experience from "./Exprience";
 import Education from "./Education";
 
 class Dashboard extends Component {
+  onLogoutClick = (e) => {
+    e.preventDefault();
+    this.props.clearCurrentProfile();
+    this.props.logoutUser();
+  };
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -44,6 +51,12 @@ class Dashboard extends Component {
               className="btn btn-danger"
             >
               Delete My Account
+            </button>
+            <button
+              onClick={this.onLogoutClick}
+              className="ml-3 btn btn-danger"
+            >
+              Logout
             </button>
           </div>
         );
@@ -87,6 +100,9 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  getCurrentProfile,
+  deleteAccount,
+  logoutUser,
+  clearCurrentProfile,
+})(Dashboard);
