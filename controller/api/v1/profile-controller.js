@@ -20,9 +20,11 @@ module.exports.fetchProfile = function (req, res) {
         errors.noprofile = "There is no profile for this user";
         return res.status(404).json(errors);
       }
-      res.json(profile);
+      return res.status(200).json(profile);
     })
-    .catch((err) => res.status(404).json(err));
+    .catch((err) => {
+      return res.status(404).json(err);
+    });
 };
 
 //@route  POST api/v1/users/profile
@@ -67,7 +69,9 @@ module.exports.createProfile = function (req, res) {
         { user: req.user.id },
         { $set: profileFields },
         { new: true }
-      ).then((profile) => res.json(profile));
+      ).then((profile) => {
+        return res.status(200).json(profile);
+      });
     } else {
       // Create
 
@@ -75,11 +79,13 @@ module.exports.createProfile = function (req, res) {
       Profile.findOne({ handle: profileFields.handle }).then((profile) => {
         if (profile) {
           errors.handle = "That handle already exists";
-          res.status(400).json(errors);
+          return res.status(400).json(errors);
         }
 
         // Save Profile
-        new Profile(profileFields).save().then((profile) => res.json(profile));
+        new Profile(profileFields).save().then((profile) => {
+          return res.status(200).json(profile);
+        });
       });
     }
   });
@@ -99,9 +105,11 @@ module.exports.returnAllProfile = function (req, res) {
         return res.status(404).json(errors);
       }
 
-      res.json(profiles);
+      return res.status(200).json(profiles);
     })
-    .catch((err) => res.status(404).json({ profile: "There are no profiles" }));
+    .catch((err) => {
+      return res.status(404).json({ profile: "There are no profiles" });
+    });
 };
 
 // @route   GET api/profile/handle/:handle
@@ -115,12 +123,14 @@ module.exports.getProfileByHandle = function (req, res) {
     .then((profile) => {
       if (!profile) {
         errors.noprofile = "There is no profile for this user";
-        res.status(404).json(errors);
+        return res.status(404).json(errors);
       }
 
-      res.json(profile);
+      return res.status(200).json(profile);
     })
-    .catch((err) => res.status(404).json(err));
+    .catch((err) => {
+      return res.status(404).json(err);
+    });
 };
 
 // @route   GET api/profile/user/:user_id
@@ -134,14 +144,16 @@ module.exports.getProfileByUserId = function (req, res) {
     .then((profile) => {
       if (!profile) {
         errors.noprofile = "There is no profile for this user";
-        res.status(404).json(errors);
+        return res.status(404).json(errors);
       }
 
-      res.json(profile);
+      return res.status(200).json(profile);
     })
-    .catch((err) =>
-      res.status(404).json({ profile: "There is no profile for this user" })
-    );
+    .catch((err) => {
+      return res
+        .status(404)
+        .json({ profile: "There is no profile for this user" });
+    });
 };
 
 // @route   POST api/profile/experience
@@ -170,7 +182,9 @@ module.exports.addExprience = function (req, res) {
     // Add to exp array
     profile.experience.unshift(newExp);
 
-    profile.save().then((profile) => res.json(profile));
+    profile.save().then((profile) => {
+      return res.status(200).json(profile);
+    });
   });
 };
 
@@ -200,7 +214,9 @@ module.exports.addEducation = function (req, res) {
     // Add to exp array
     profile.education.unshift(newEdu);
 
-    profile.save().then((profile) => res.json(profile));
+    profile.save().then((profile) => {
+      return res.status(200).json(profile);
+    });
   });
 };
 
@@ -219,9 +235,13 @@ module.exports.deleteExprience = function (req, res) {
       profile.experience.splice(removeIndex, 1);
 
       // Save
-      profile.save().then((profile) => res.json(profile));
+      profile.save().then((profile) => {
+        return res.status(200).json(profile);
+      });
     })
-    .catch((err) => res.status(404).json(err));
+    .catch((err) => {
+      return res.status(404).json(err);
+    });
 };
 
 // @route   DELETE api/profile/education/:edu_id
@@ -239,9 +259,13 @@ module.exports.deleteEducation = function (req, res) {
       profile.education.splice(removeIndex, 1);
 
       // Save
-      profile.save().then((profile) => res.json(profile));
+      profile.save().then((profile) => {
+        return res.status(200).json(profile);
+      });
     })
-    .catch((err) => res.status(404).json(err));
+    .catch((err) => {
+      return res.status(404).json(err);
+    });
 };
 
 // @route   DELETE api/profile
@@ -249,8 +273,8 @@ module.exports.deleteEducation = function (req, res) {
 // @access  Private
 module.exports.deleteUserAndProfile = function (req, res) {
   Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-    User.findOneAndRemove({ _id: req.user.id }).then(() =>
-      res.json({ success: true })
-    );
+    User.findOneAndRemove({ _id: req.user.id }).then(() => {
+      return res.status(200).json({ success: true });
+    });
   });
 };
