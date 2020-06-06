@@ -37,11 +37,13 @@ module.exports.createPost = async function (req, res) {
       // If any errors, send 400 with errors object
       return res.status(400).json(errors);
     }
+    const findHandle = await Profile.findOne({ user: req.user });
     const newPost = await Post.create({
       text: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,
       user: req.user.id,
+      handle: findHandle.handle || "not-found",
     });
     return res.status(200).json(newPost);
   } catch (error) {

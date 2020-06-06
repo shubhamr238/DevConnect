@@ -38,15 +38,18 @@ class PostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-md-block"
-                src={post.avatar}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center">{post.name}</p>
+            <Link to={`/profile/${post.handle}`}>
+              <div className="card" style={{ border: "none", width: "18rem" }}>
+                <img
+                  style={{ width: "100px" }}
+                  className="rounded-circle d-md-block ml-4"
+                  src={post.avatar}
+                  alt={post.name}
+                />
+                <br />
+                <h5 class="card-title">{post.name}</h5>
+              </div>
+            </Link>
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>
