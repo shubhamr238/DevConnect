@@ -43,6 +43,9 @@ const PostSchema = new mongoose.Schema({
       avatar: {
         type: String,
       },
+      handle: {
+        type: String,
+      },
       date: {
         type: Date,
         default: Date.now,

@@ -47,7 +47,7 @@ class PostItem extends Component {
                   alt={post.name}
                 />
                 <br />
-                <h5 class="card-title">{post.name}</h5>
+                <h5 className="card-title">{post.name}</h5>
               </div>
             </Link>
           </div>
