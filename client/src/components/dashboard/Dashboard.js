@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -20,6 +20,7 @@ class Dashboard extends Component {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
+    this.props.history.push("/login");
   };
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -105,4 +106,4 @@ export default connect(mapStateToProps, {
   deleteAccount,
   logoutUser,
   clearCurrentProfile,
-})(Dashboard);
+})(withRouter(Dashboard));

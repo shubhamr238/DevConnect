@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/actions/authActions";
@@ -10,6 +10,7 @@ class Navbar extends Component {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
+    this.props.history.push("/login");
   };
 
   render() {
@@ -95,5 +96,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(
-  Navbar
+  withRouter(Navbar)
 );
