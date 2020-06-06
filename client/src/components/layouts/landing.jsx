@@ -16,7 +16,7 @@ class Landing extends Component {
       <div className="landing">
         <div className="dark-overlay landing-inner text-light">
           <div className="container">
-            <div className="row">
+            <div className="row" style={{ marginTop: "90px" }}>
               <div className="col-md-12 text-center">
                 <MediaQuery minDeviceWidth={320} maxDeviceWidth={767}>
                   <h1 className="display-4 mb-4">DevConnect</h1>
