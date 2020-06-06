@@ -23,7 +23,7 @@ class ProfileHeader extends Component {
               <p className="lead text-center">
                 {profile.status}
                 {isEmpty(profile.company) ? null : (
-                  <span>at {profile.company}</span>
+                  <span> at {profile.company}</span>
                 )}
               </p>
               {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
