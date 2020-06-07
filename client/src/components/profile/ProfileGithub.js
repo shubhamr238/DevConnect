@@ -18,7 +18,7 @@ class ProfileGithub extends Component {
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc`
     );
     const headers = {
-      Authorization: `token ${keys.githubToken}`,
+      Authorization: process.env.GITHUB_TOKEN || `token ${keys.githubToken}`,
     };
 
     axios
