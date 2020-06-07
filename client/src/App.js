@@ -1,6 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 import Navbar from "./components/layouts/navbar";
@@ -55,48 +60,37 @@ function App() {
         <div className="App">
           <Navbar />
           <div style={{ minHeight: "100vh" }} className="main">
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/profiles" component={Profiles} />
-            <Route exact path="/profile/:handle" component={Profile} />
-            <Route exact path="/not-found" component={NotFound} />
             <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/not-found" component={NotFound} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            </Switch>
-            <Switch>
               <PrivateRoute
                 exact
                 path="/create-profile"
                 component={CreateProfile}
               />
-            </Switch>
-            <Switch>
               <PrivateRoute
                 exact
                 path="/edit-profile"
                 component={EditProfile}
               />
-            </Switch>
-            <Switch>
               <PrivateRoute
                 exact
                 path="/add-experience"
                 component={AddExperience}
               />
-            </Switch>
-            <Switch>
               <PrivateRoute
                 exact
                 path="/add-education"
                 component={AddEducation}
               />
-            </Switch>
-            <Switch>
               <PrivateRoute exact path="/feed" component={Posts} />
-            </Switch>
-            <Switch>
               <PrivateRoute exact path="/post/:id" component={Post} />
+              <Redirect to="/not-found" />
             </Switch>
           </div>
           <Footer />
