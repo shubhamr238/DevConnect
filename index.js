@@ -3,7 +3,7 @@ const passport = require("passport");
 const passportJWT = require("./config/passport-jwt-strategy");
 const app = express();
 const db = require("./config/mongoose");
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 // body parser for req.body
 app.use(express.urlencoded({ extended: true }));

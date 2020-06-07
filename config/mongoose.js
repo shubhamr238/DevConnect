@@ -6,8 +6,9 @@ mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 
-//name of the db is products-api
-mongoose.connect("mongodb://localhost/devConnect");
+//connect to db
+const dbString = process.env.MONGO_URI || "mongodb://localhost/devConnect";
+mongoose.connect(dbString);
 
 const db = mongoose.connection;
 //for error

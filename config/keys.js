@@ -1,3 +1,3 @@
 module.exports = {
-  secretOrKey: "secret31",
+  secretOrKey: process.env.SECRET_OR_KEY || "secret31",
 };
